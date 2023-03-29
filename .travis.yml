@@ -11,17 +11,17 @@ script:
   - docker run -e CI=true cygnetops/react-test npm test
 
 after_success:
-  - docker build -t cygnetops/multi-client-10-14 ./client
-  - docker build -t cygnetops/multi-nginx-10-14 ./nginx
-  - docker build -t cygnetops/multi-server-10-14 ./server
-  - docker build -t cygnetops/multi-worker-10-14 ./worker
-  # Log in to the docker CLI
+  - docker build -t krstncreyes/multi-client ./client
+  - docker build -t krstncreyes/multi-nginx ./nginx
+  - docker build -t krstncreyes/multi-server ./server
+  - docker build -t krstncreyes/multi-worker ./worker
+  # Login to Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # Take those images and push them to docker hub
-  - docker push cygnetops/multi-client-10-14
-  - docker push cygnetops/multi-nginx-10-14
-  - docker push cygnetops/multi-server-10-14
-  - docker push cygnetops/multi-worker-10-14
+  # Take images and push to Docker hub
+  - docker push krstncreyes/multi-client
+  - docker push krstncreyes/multi-nginx
+  - docker push krstncreyes/multi-server
+  - docker push krstncreyes/multi-worker
 
 deploy:
   provider: elasticbeanstalk
